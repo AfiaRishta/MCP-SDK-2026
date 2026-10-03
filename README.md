@@ -1,8 +1,8 @@
-# Job Assistant — an MCP Server for Smarter Job Hunting 🎯
+# Job Assistant — an MCP Server for Smarter Job Hunting 
 
 Hey, welcome. This is a project I built to learn the **Model Context Protocol (MCP)** by solving a problem I actually have: job hunting is slow, repetitive, and most of the effort goes into roles I was never a strong fit for in the first place.
 
-So instead of automating my way to hundreds of blind applications (which doesn't work, and breaks every job board's rules anyway), I built a tool that does the *tedious* part — finding roles, honestly scoring my fit, and drafting a tailored first draft — and leaves the *deciding* part to me.
+So instead of automating my way to hundreds of blind applications (which doesn't work, and breaks every job board's rules anyway), I built a tool that does the *tedious* part finding roles, honestly scoring my fit, and drafting a tailored first draft and leaves the *deciding* part to me.
 
 If you're reading this, you're probably one of three people: someone checking out my work, a fellow learner trying to understand MCP, or future-me coming back after a break. This README is written for all three.
 
@@ -10,7 +10,7 @@ If you're reading this, you're probably one of three people: someone checking ou
 
 ## The one-line version
 
-It searches real job listings, scores how well each one actually fits my profile, and drafts a tailored cover letter — all exposed as tools over the Model Context Protocol, so any AI host can use them.
+It searches real job listings, scores how well each one actually fits my profile, and drafts a tailored cover letter all exposed as tools over the Model Context Protocol, so any AI host can use them.
 
 > **The guiding principle: the AI drafts, I decide. It never applies to anything for me.**
 
@@ -23,25 +23,25 @@ A quick bit of honesty, because the *why* matters more than the code.
 Everyone's talking about auto-applying to jobs with AI. I looked into it and decided against it, for two reasons:
 
 - **It doesn't actually work.** Mass-applied applications get filtered out before a human ever sees them.
-- **It breaks the rules.** Bulk automation violates the terms of service of every major job platform — exactly the wrong signal to send when the roles I want are at places that care deeply about rules and governance.
+- **It breaks the rules.** Bulk automation violates the terms of service of every major job platform exactly the wrong signal to send when the roles I want are at places that care deeply about rules and governance.
 
-So the goal here isn't volume. It's **quality, speed, and honesty**: fewer applications, each one a genuine fit, each one tailored, produced in a fraction of the usual time — with me reviewing and submitting every single one myself.
+So the goal here isn't volume. It's **quality, speed, and honesty**: fewer applications, each one a genuine fit, each one tailored, produced in a fraction of the usual time with me reviewing and submitting every single one myself.
 
 <br>
 
 ## What it does
 
-The tool is built around a single source of truth — a `profile.md` file describing my real background. Every feature reads from it, and nothing is allowed to invent experience I don't have. (That grounding idea comes straight from a retrieval-augmented-generation project I built earlier.)
+The tool is built around a single source of truth a `profile.md` file describing my real background. Every feature reads from it, and nothing is allowed to invent experience I don't have. (That grounding idea comes straight from a retrieval-augmented-generation project I built earlier.)
 
 On top of that profile sit three tools, which form a funnel:
 
-**🔍 `search_jobs` — casts the net.**
+**🔍 `search_jobs`: casts the net.**
 Calls the Adzuna job-search API and returns real listings by role and location, with titles, companies, salaries, descriptions, and apply links.
 
-**📊 `score_match` — narrows it down.**
+**📊 `score_match`: narrows it down.**
 Sends a listing plus my profile to an LLM and returns an honest fit score out of 100, the requirements I clearly meet (with evidence from my profile), the gaps, and a recommendation like "strong apply" or "stretch." This is the step that turns a long list into a short one.
 
-**✍️ `draft_cover_letter` — does the slow work.**
+**✍️ `draft_cover_letter`: does the slow work.**
 Writes a tailored, ATS-friendly cover letter for the roles worth applying to, drawing only on my real experience.
 
 So the flow is simple:
@@ -71,13 +71,13 @@ flowchart TD
     H --> HOST[Any MCP host<br/>Inspector, Claude, etc.]
 ```
 
-Everything runs locally except the two API calls — Adzuna for jobs, Gemini for the AI work. My personal profile never leaves my machine.
+Everything runs locally except the two API calls Adzuna for jobs, Gemini for the AI work. My personal profile never leaves my machine.
 
 <br>
 
 ## What is MCP, quickly?
 
-If you haven't come across it: **MCP (Model Context Protocol)** is an emerging open standard for how AI tools talk to each other. Think of it as a universal adapter — instead of hardcoding logic into one app, you expose clean **tools** and **resources** over a protocol that any AI host can discover and call.
+If you haven't come across it: **MCP (Model Context Protocol)** is an emerging open standard for how AI tools talk to each other. Think of it as a universal adapter instead of hardcoding logic into one app, you expose clean **tools** and **resources** over a protocol that any AI host can discover and call.
 
 In this project:
 
@@ -99,7 +99,7 @@ That separation is the core MCP idea.
 | Environment | Docker + Dev Containers | portable, reproducible setup |
 | Config | python-dotenv | loads API keys from `.env` |
 
-This project reuses the Vertex AI / Gemini setup from my previous Google ADK project — each project building on the last.
+This project reuses the Vertex AI / Gemini setup from my previous Google ADK project each project building on the last.
 
 <br>
 
@@ -149,7 +149,7 @@ cd job_assistant_mcp
 mcp dev server.py
 ```
 
-This launches the MCP Inspector — a browser-based tool for testing. Open the local URL it prints (check the **Ports** tab in VS Code if it doesn't open automatically).
+This launches the MCP Inspector a browser-based tool for testing. Open the local URL it prints (check the **Ports** tab in VS Code if it doesn't open automatically).
 
 <br>
 
@@ -159,8 +159,8 @@ In the Inspector:
 
 1. **Resources tab** → open `profile://me` to confirm your profile loads.
 2. **Tools tab** → run `search_jobs` with a role and location, then copy a listing's title and description.
-3. Run `score_match` with that title and description — get an honest fit score with evidence and gaps.
-4. Run `draft_cover_letter` for the roles worth it — get a tailored draft.
+3. Run `score_match` with that title and description get an honest fit score with evidence and gaps.
+4. Run `draft_cover_letter` for the roles worth it get a tailored draft.
 5. Review the draft, make it sound like you, and apply yourself through the real link.
 
 A typical session: search your target roles, score the handful that look promising, draft letters for the 3-5 genuine fits, and submit them yourself. What used to take a whole evening for one good application now produces several.
@@ -187,8 +187,8 @@ MCP-SDK-2026/
 
 Worth being straight about, because knowing the edges matters:
 
-- **No Indeed, SEEK, or LinkedIn.** They don't offer open APIs and scraping breaks their terms. Adzuna is the one genuinely open, official source — and building on sanctioned data is a deliberate choice, not a shortcut.
-- **It drafts cover letters, not resumes — yet.** A resume-tailoring tool is the natural next addition.
+- **No Indeed, SEEK, or LinkedIn.** They don't offer open APIs and scraping breaks their terms. Adzuna is the one genuinely open, official source and building on sanctioned data is a deliberate choice, not a shortcut.
+- **It drafts cover letters, not resumes yet.** A resume-tailoring tool is the natural next addition.
 - **It never applies for you.** By design. It gets each application to "ready to send," and I click submit. That keeps it within every platform's rules.
 - **The scoring is only as good as the profile.** Honest in, honest out.
 
@@ -206,9 +206,9 @@ Worth being straight about, because knowing the edges matters:
 
 This project taught me things I couldn't have picked up from reading alone:
 
-- How MCP actually works from the inside — tools, resources, and the protocol that connects them
+- How MCP actually works from the inside tools, resources, and the protocol that connects them
 - How to ground an LLM in a real source so it can't invent things (my RAG principle, applied to my own CV)
-- Why honest, official API integration beats scraping — technically and professionally
+- Why honest, official API integration beats scraping technically and professionally
 - Why mass-applying to jobs fails, and why a quality funnel beats volume every time
 - How each project builds on the last: ADK agents → RAG → MCP, one layer at a time
 
