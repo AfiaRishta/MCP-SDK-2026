@@ -160,5 +160,4 @@ Built by
 Afia — Bachelor of IT, Software Engineering (La Trobe University Bendigo, 2026)
 
 Transitioning into AI engineering, learning out loud, one project at a time.
-
 If something doesn't work, 90% of the time it's either the dev container not being active or a missing key in your .env. Check those two first.
