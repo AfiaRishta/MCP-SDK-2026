@@ -123,6 +123,7 @@ Review the draft, make it sound like you, and apply yourself through the real li
 A typical session: search your target roles, score the handful that look promising, draft letters for the 3-5 genuine fits, and submit them yourself. What used to take a whole evening for one good application now produces several.
 
 Project structure
+
 MCP-SDK-2026/
 ├── .devcontainer/
 │   └── devcontainer.json      ← container setup (Python, Node, GitHub CLI)
@@ -132,6 +133,7 @@ MCP-SDK-2026/
 │   └── .env                   ← your API keys (never committed)
 ├── requirements.txt           ← pinned dependencies
 └── .gitignore                 ← keeps secrets and junk out of git
+
 Honest limitations
 
 Worth being straight about, because knowing the edges matters:
