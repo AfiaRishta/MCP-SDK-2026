@@ -2,7 +2,7 @@ Job Assistant — an MCP Server for Smarter Job Hunting
 
 Hey, welcome. This is a project I built to learn the Model Context Protocol (MCP) by solving a problem I actually have: job hunting is slow, repetitive, and most of the effort goes into roles I was never a strong fit for in the first place.
 
-So instead of automating my way to hundreds of blind applications (which doesn't work, and breaks every job board's rules anyway), I built a tool that does the tedious part — finding roles, honestly scoring my fit, and drafting a tailored first draft — and leaves the deciding part to me.
+So instead of automating my way to hundreds of blind applications (which doesn't work, and breaks every job board's rules anyway), I built a tool that does the tedious part finding roles, honestly scoring my fit, and drafting a tailored first draft and leaves the deciding part to me.
 
 If you're reading this, you're probably one of three people: someone checking out my work, a fellow learner trying to understand MCP, or future-me coming back after a break. This README is written for all three.
 
@@ -26,15 +26,17 @@ The tool is built around a single source of truth a profile.md file describing m
 
 On top of that profile sit three tools, which form a funnel:
 
-🔍 search_jobs — casts the net. Calls the Adzuna job-search API and returns real listings by role and location, with titles, companies, salaries, descriptions, and apply links.
+🔍 search_jobs: casts the net. Calls the Adzuna job-search API and returns real listings by role and location, with titles, companies, salaries, descriptions, and apply links.
 
-📊 score_match — narrows it down. Sends a listing plus my profile to an LLM and returns an honest fit score out of 100, the requirements I clearly meet (with evidence from my profile), the gaps, and a recommendation like "strong apply" or "stretch." This is the step that turns a long list into a short one.
+📊 score_match: narrows it down. Sends a listing plus my profile to an LLM and returns an honest fit score out of 100, the requirements I clearly meet (with evidence from my profile), the gaps, and a recommendation like "strong apply" or "stretch." This is the step that turns a long list into a short one.
 
-✍️ draft_cover_letter — does the slow work. Writes a tailored, ATS-friendly cover letter for the roles worth applying to, drawing only on my real experience.
+✍️ draft_cover_letter: does the slow work. Writes a tailored, ATS-friendly cover letter for the roles worth applying to, drawing only on my real experience.
 
 So the flow is simple: cast wide → score down to a shortlist → draft for the best → review and send myself.
 
 How it fits together
+
+
                     profile.md
               (single source of truth)
                         │
@@ -50,6 +52,8 @@ How it fits together
               exposed as MCP tools
                         │
         any MCP host (Inspector, Claude, etc.)
+
+        
 
 Everything runs locally except the two API calls (Adzuna for jobs, Gemini for the AI work). My personal profile stays on my machine.
 
